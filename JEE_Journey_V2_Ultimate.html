@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="JEE Journey V2">
+    <title>JEE Journey V2 - AIR 500</title>
+    <style>
+:root {
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-card: #ffffff;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --border: #e5e7eb;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border: #334155;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--bg-primary);
+    position: relative;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+.header {
+    padding: 20px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.date-info h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.date-info p {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.icon-btn {
+    background: var(--bg-secondary);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.content {
+    padding: 20px;
+}
+
+.card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+.target-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+}
+
+.target-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+    margin-top: 4px;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.progress-bar {
+    height: 12px;
+    background: var(--bg-secondary);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--success) 0%, var(--primary) 100%);
+    transition: width 0.3s ease;
+}
+
+.block-timer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.block-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.block-icon {
+    font-size: 20px;
+}
+
+.block-name {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.block-time {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.timer-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-btn.active {
+    background: var(--success);
+}
+
+.btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.input {
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 15px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.select {
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 15px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 600px;
+    width: 100%;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+    z-index: 1000;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    flex: 1;
+    font-size: 11px;
+}
+
+.nav-item.active {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: var(--bg-card);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.quote-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    text-align: center;
+    font-style: italic;
+}
+
+.alert {
+    padding: 12px 16px;
+    background: #fef3c7;
+    color: #78350f;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.alert-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.test-item {
+    background: var(--bg-secondary);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.test-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.test-code {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.test-total {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.test-upcoming {
+    border-left: 4px solid var(--warning);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.test-completed {
+    border-left: 4px solid var(--success);
+}
+
+.topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.topic-item {
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+}
+
+.topic-item.weak {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger);
+}
+
+.topic-item.average {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--warning);
+}
+
+.topic-item.strong {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+}
+
+.error-item {
+    padding: 14px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--danger);
+}
+
+.error-topic {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.error-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.checkpoint-item {
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.checkpoint-date {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.checkpoint-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-ahead {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+}
+
+.status-ontrack {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--warning);
+}
+
+.status-behind {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+}
+
+.chart-container {
+    margin: 20px 0;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.energy-rating {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.energy-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--border);
+    background: var(--bg-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.energy-btn.selected {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.block-completion {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin: 12px 0;
+}
+
+.block-dot {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.block-dot.completed {
+    background: var(--success);
+    color: white;
+}
+
+.block-dot.active {
+    background: var(--warning);
+    color: white;
+}
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Home Page -->
+        <div id="page-home" class="page active">
+            <header class="header">
+                <div class="header-top">
+                    <div class="date-info">
+                        <h1 id="current-date">Loading...</h1>
+                        <p id="days-remaining">Loading...</p>
+                    </div>
+                    <button id="theme-toggle" class="icon-btn">🌙</button>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="card target-card">
+                    <h2>🎯 Target AIR 500</h2>
+                    <div class="target-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="days-completed">0</div>
+                            <div class="stat-label">Days</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="tests-completed">0/55</div>
+                            <div class="stat-label">Tests</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="total-hours">0</div>
+                            <div class="stat-label">Total Hours</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="alerts-container"></div>
+
+                <div class="card">
+                    <h3>Today's Study Blocks (B1-B7)</h3>
+                    <div class="block-completion" id="block-completion"></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="blocks-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div style="text-align: center; margin: 8px 0; font-size: 14px; color: var(--text-secondary);">
+                        <span id="blocks-completed">0</span> / 7 blocks completed
+                    </div>
+
+                    <div style="margin-top: 16px;" id="blocks-container"></div>
+
+                    <div style="margin-top: 20px;">
+                        <label style="font-size: 14px; font-weight: 600; display: block; margin-bottom: 8px;">Energy Level Today</label>
+                        <div class="energy-rating" id="energy-rating"></div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="saveDay()">💾 Save Today's Data</button>
+                </div>
+
+                <div class="card quote-card">
+                    <p id="daily-quote">From 70 to AIR 500. Every hour counts. No excuses.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tests Page -->
+        <div id="page-tests" class="page">
+            <header class="header">
+                <h1>📝 Test Schedule (55 Tests)</h1>
+            </header>
+            <div class="content">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="filterTests('upcoming')">Upcoming</button>
+                    <button class="tab-btn" onclick="filterTests('completed')">Completed</button>
+                    <button class="tab-btn" onclick="filterTests('all')">All</button>
+                </div>
+                <button class="btn btn-primary" onclick="openAddTest()">+ Add Test Score</button>
+                <div id="tests-list" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+
+        <!-- Topics Page -->
+        <div id="page-topics" class="page">
+            <header class="header">
+                <h1>📚 Topic Mastery</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <h3>Physics Topics</h3>
+                    <div class="topic-grid" id="physics-topics"></div>
+                </div>
+                <div class="card">
+                    <h3>Chemistry Topics</h3>
+                    <div class="topic-grid" id="chemistry-topics"></div>
+                </div>
+                <div class="card">
+                    <h3>Mathematics Topics</h3>
+                    <div class="topic-grid" id="maths-topics"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Page -->
+        <div id="page-analysis" class="page">
+            <header class="header">
+                <h1>📊 Analysis & Progress</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <h3>Weekly Comparison</h3>
+                    <div id="weekly-stats"></div>
+                </div>
+
+                <div class="card">
+                    <h3>🎯 Checkpoints</h3>
+                    <div id="checkpoints-list"></div>
+                </div>
+
+                <div class="card">
+                    <h3>📝 Error Log</h3>
+                    <button class="btn btn-secondary" onclick="openAddError()" style="margin-bottom: 12px;">+ Add Mistake</button>
+                    <div id="errors-list"></div>
+                </div>
+
+                <div class="card">
+                    <h3>Block Consistency</h3>
+                    <div id="block-stats"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="page-settings" class="page">
+            <header class="header">
+                <h1>⚙️ Settings</h1>
+            </header>
+            <div class="content">
+                <div class="card">
+                    <h3>Data Management</h3>
+                    <button class="btn btn-primary" onclick="exportData()">📥 Export All Data</button>
+                    <button class="btn btn-success" onclick="exportWeeklyReport()">📄 Export Weekly Report</button>
+                    <button class="btn btn-danger" onclick="resetData()">🗑️ Reset All Data</button>
+                </div>
+                <div class="card">
+                    <h3>About</h3>
+                    <p><strong>JEE Journey V2.0 Ultimate</strong></p>
+                    <p>Target: AIR 500 | May 17, 2026</p>
+                    <p style="margin-top: 8px;">🎯 55 Tests Scheduled</p>
+                    <p>🔥 7 Study Blocks/Day</p>
+                    <p>⏱️ 16+ Hours Target</p>
+                    <p style="margin-top: 12px; font-size: 13px; color: var(--text-secondary);">
+                        📱 To install: Tap browser menu → "Add to Home Screen"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" onclick="switchPage('home')">
+                <span style="font-size: 20px;">🏠</span>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" onclick="switchPage('tests')">
+                <span style="font-size: 20px;">📝</span>
+                <span>Tests</span>
+            </button>
+            <button class="nav-item" onclick="switchPage('topics')">
+                <span style="font-size: 20px;">📚</span>
+                <span>Topics</span>
+            </button>
+            <button class="nav-item" onclick="switchPage('analysis')">
+                <span style="font-size: 20px;">📊</span>
+                <span>Analysis</span>
+            </button>
+            <button class="nav-item" onclick="switchPage('settings')">
+                <span style="font-size: 20px;">⚙️</span>
+                <span>Settings</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Add Test Modal -->
+    <div id="test-modal" class="modal-overlay" onclick="closeModal('test')">
+        <div class="modal" onclick="event.stopPropagation()">
+            <h3>Add Test Score</h3>
+            <select id="test-code" class="select">
+                <option value="">Select Test...</option>
+            </select>
+            <input type="number" id="test-physics" class="input" placeholder="Physics Score (0-100)" min="0" max="100">
+            <input type="number" id="test-chemistry" class="input" placeholder="Chemistry Score (0-100)" min="0" max="100">
+            <input type="number" id="test-maths" class="input" placeholder="Maths Score (0-100)" min="0" max="100">
+            <button class="btn btn-primary" onclick="saveTest()">Save Test Score</button>
+        </div>
+    </div>
+
+    <!-- Add Error Modal -->
+    <div id="error-modal" class="modal-overlay" onclick="closeModal('error')">
+        <div class="modal" onclick="event.stopPropagation()">
+            <h3>Log Mistake</h3>
+            <select id="error-subject" class="select">
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="maths">Mathematics</option>
+            </select>
+            <input type="text" id="error-topic" class="input" placeholder="Topic (e.g., Electrostatics)">
+            <textarea id="error-desc" class="input" placeholder="What was the mistake?" style="min-height: 80px; resize: vertical;"></textarea>
+            <button class="btn btn-primary" onclick="saveError()">Save Mistake</button>
+        </div>
+    </div>
+
+    <!-- Topic Detail Modal -->
+    <div id="topic-modal" class="modal-overlay" onclick="closeModal('topic')">
+        <div class="modal" onclick="event.stopPropagation()">
+            <h3 id="topic-modal-title">Topic Status</h3>
+            <div style="margin: 20px 0;">
+                <button class="btn btn-danger" onclick="setTopicStatus('weak')" style="margin-bottom: 8px;">🔴 Weak - Need Work</button>
+                <button class="btn" style="background: var(--warning); color: white; margin-bottom: 8px;" onclick="setTopicStatus('average')">🟡 Average - Practicing</button>
+                <button class="btn btn-success" onclick="setTopicStatus('strong')">🟢 Strong - Mastered</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// App State
+const APP = {
+    startDate: new Date('2026-01-19'),
+    targetDate: new Date('2026-05-17'),
+    today: {
+        date: new Date().toISOString().split('T')[0],
+        blocks: {B1: false, B2: false, B3: false, B4: false, B5: false, B6: false, B7: false},
+        energy: null
+    },
+    history: [],
+    tests: [],
+    topics: {},
+    errors: [],
+    checkpoints: [
+        {date: '2026-02-01', target: 160, name: 'Feb Checkpoint'},
+        {date: '2026-03-01', target: 190, name: 'Mar Checkpoint'},
+        {date: '2026-04-01', target: 220, name: 'Apr Checkpoint'},
+        {date: '2026-05-01', target: 250, name: 'May Checkpoint'}
+    ],
+    currentTopicEdit: null
+};
+
+// Study Blocks Configuration
+const BLOCKS = [
+    {id: 'B1', time: '5:15-7:15', subject: 'Chemistry', icon: '🧪', desc: 'Recall + Practice'},
+    {id: 'B2', time: '7:45-9:45', subject: 'Physics', icon: '⚛️', desc: 'Recall + PYQs'},
+    {id: 'B3', time: '9:55-12:30', subject: 'Maths', icon: '📐', desc: 'Maths Only'},
+    {id: 'B4', time: '1:10-3:10', subject: 'Chemistry', icon: '🧪', desc: 'Practice'},
+    {id: 'B5', time: '3:20-5:20', subject: 'Physics', icon: '⚛️', desc: 'Practice/Advanced'},
+    {id: 'B6', time: '5:30-7:00', subject: 'Maths', icon: '📐', desc: 'Revision/PDFs'},
+    {id: 'B7', time: '7:10-8:35', subject: 'Analysis', icon: '📊', desc: 'Analysis + Light Recall'}
+];
+
+// 55 Test Schedule
+const TEST_SCHEDULE = [
+    {code: 'M1', date: '2026-01-16', type: 'Main'}, {code: 'M2', date: '2026-01-18', type: 'Main'},
+    {code: 'M3', date: '2026-01-19', type: 'Main'}, {code: 'M4', date: '2026-01-21', type: 'Main'},
+    {code: 'M5', date: '2026-01-23', type: 'Main'}, {code: 'M6', date: '2026-01-25', type: 'Main'},
+    {code: 'M7', date: '2026-01-26', type: 'Main'}, {code: 'M8', date: '2026-01-30', type: 'Main'},
+    {code: 'M9', date: '2026-02-02', type: 'Main'}, {code: 'M10', date: '2026-02-04', type: 'Main'},
+    {code: 'A1', date: '2026-02-06', type: 'Adv'}, {code: 'M11', date: '2026-02-08', type: 'Main'},
+    {code: 'A2', date: '2026-02-11', type: 'Adv'}, {code: 'M12', date: '2026-02-13', type: 'Main'},
+    {code: 'M13', date: '2026-02-22', type: 'Main'}, {code: 'M14', date: '2026-02-23', type: 'Main'},
+    {code: 'M15', date: '2026-02-26', type: 'Main'}, {code: 'A3', date: '2026-03-01', type: 'Adv'},
+    {code: 'M16', date: '2026-03-02', type: 'Main'}, {code: 'M17', date: '2026-03-04', type: 'Main'},
+    {code: 'M18', date: '2026-03-06', type: 'Main'}, {code: 'A4', date: '2026-03-11', type: 'Adv'},
+    {code: 'M19', date: '2026-03-13', type: 'Main'}, {code: 'M20', date: '2026-03-15', type: 'Main'},
+    {code: 'M21', date: '2026-03-16', type: 'Main'}, {code: 'A5', date: '2026-03-18', type: 'Adv'},
+    {code: 'M22', date: '2026-03-20', type: 'Main'}, {code: 'A6', date: '2026-03-22', type: 'Adv'},
+    {code: 'M23', date: '2026-03-23', type: 'Main'}, {code: 'M24', date: '2026-03-25', type: 'Main'},
+    {code: 'M25', date: '2026-03-26', type: 'Main'}, {code: 'M26', date: '2026-03-27', type: 'Main'},
+    {code: 'M27', date: '2026-03-28', type: 'Main'}, {code: 'M28', date: '2026-03-29', type: 'Main'},
+    {code: 'M29', date: '2026-03-30', type: 'Main'}, {code: 'M30', date: '2026-03-31', type: 'Main'},
+    {code: 'A7', date: '2026-04-02', type: 'Adv'}, {code: 'A8', date: '2026-04-04', type: 'Adv'},
+    {code: 'A9', date: '2026-04-07', type: 'Adv'}, {code: 'A10', date: '2026-04-09', type: 'Adv'},
+    {code: 'A11', date: '2026-04-11', type: 'Adv'}, {code: 'A12', date: '2026-04-14', type: 'Adv'},
+    {code: 'A13', date: '2026-04-17', type: 'Adv'}, {code: 'A14', date: '2026-04-19', type: 'Adv'},
+    {code: 'A15', date: '2026-04-22', type: 'Adv'}, {code: 'A16', date: '2026-04-24', type: 'Adv'},
+    {code: 'A17', date: '2026-04-26', type: 'Adv'}, {code: 'A18', date: '2026-04-29', type: 'Adv'},
+    {code: 'A19', date: '2026-05-01', type: 'Adv'}, {code: 'A20', date: '2026-05-03', type: 'Adv'},
+    {code: 'A21', date: '2026-05-06', type: 'Adv'}, {code: 'A22', date: '2026-05-08', type: 'Adv'},
+    {code: 'A23', date: '2026-05-10', type: 'Adv'}, {code: 'A24', date: '2026-05-12', type: 'Adv'},
+    {code: 'A25', date: '2026-05-14', type: 'Adv'}
+];
+
+// JEE Topics
+const TOPICS = {
+    physics: ['Mechanics', 'Kinematics', 'Laws of Motion', 'Work Energy Power', 'Rotational Motion', 'Gravitation', 'SHM', 'Waves', 'Thermodynamics', 'Kinetic Theory', 'Electrostatics', 'Capacitance', 'Current Electricity', 'Magnetic Effects', 'EMI', 'AC Circuits', 'EM Waves', 'Optics', 'Modern Physics', 'Semiconductors'],
+    chemistry: ['Atomic Structure', 'Chemical Bonding', 'Gaseous State', 'Thermodynamics', 'Equilibrium', 'Ionic Equilibrium', 'Redox', 'Electrochemistry', 'Chemical Kinetics', 'Surface Chemistry', 'Solid State', 'Solutions', 'Metallurgy', 'p-Block', 'd-Block', 'f-Block', 'Coordination', 'Organic Basics', 'Isomerism', 'Hydrocarbons', 'Reactions', 'GOC', 'Aldehydes Ketones', 'Carboxylic Acids', 'Amines', 'Biomolecules', 'Polymers'],
+    maths: ['Sets Relations', 'Complex Numbers', 'Quadratic Equations', 'Sequences Series', 'Permutations', 'Binomial', 'Matrices', 'Determinants', 'Probability', 'Functions', 'Limits', 'Continuity', 'Differentiation', 'Applications of Derivatives', 'Indefinite Integration', 'Definite Integration', 'Area Under Curves', 'Differential Equations', 'Vectors', '3D Geometry', 'Straight Lines', 'Circles', 'Conic Sections', 'Statistics']
+};
+
+const QUOTES = [
+    "From 70 to AIR 500. Every hour counts. No excuses.",
+    "16 hours today = One step closer to IIT.",
+    "Your competition is sleeping. Are you?",
+    "Pain is temporary. AIR 500 is permanent.",
+    "119 days. That's all you have. Make them count.",
+    "Champions are made in these silent hours.",
+    "Discipline > Motivation. Show up every day.",
+    "May 17 will come. Will you be ready?",
+    "Every block you complete is a vote for the person you want to become.",
+    "The difference between AIR 500 and AIR 5000? Today's discipline.",
+    "Your future self is watching. Make them proud.",
+    "No distractions. No excuses. Just results."
+];
+
+function init() {
+    loadData();
+    updateDateTime();
+    updateDashboard();
+    renderBlocks();
+    renderEnergyRating();
+    renderTopics();
+    loadTestsList();
+    loadCheckpoints();
+    populateTestDropdown();
+}
+
+function loadData() {
+    const saved = localStorage.getItem('jee_v2_data');
+    if (saved) {
+        const data = JSON.parse(saved);
+        APP.history = data.history || [];
+        APP.tests = data.tests || [];
+        APP.topics = data.topics || {};
+        APP.errors = data.errors || [];
+        const today = APP.history.find(d => d.date === APP.today.date);
+        if (today) APP.today = {...APP.today, ...today};
+    }
+}
+
+function saveData() {
+    const idx = APP.history.findIndex(d => d.date === APP.today.date);
+    if (idx >= 0) APP.history[idx] = {...APP.today};
+    else APP.history.push({...APP.today});
+    
+    localStorage.setItem('jee_v2_data', JSON.stringify({
+        history: APP.history,
+        tests: APP.tests,
+        topics: APP.topics,
+        errors: APP.errors
+    }));
+}
+
+function updateDateTime() {
+    const now = new Date();
+    document.getElementById('current-date').textContent = now.toLocaleDateString('en-IN', {
+        weekday: 'long', month: 'long', day: 'numeric'
+    });
+    const daysRemaining = Math.ceil((APP.targetDate - now) / (1000 * 60 * 60 * 24));
+    document.getElementById('days-remaining').textContent = `${daysRemaining} days to JEE Advanced`;
+    
+    const daysCompleted = Math.max(0, Math.ceil((now - APP.startDate) / (1000 * 60 * 60 * 24)));
+    document.getElementById('days-completed').textContent = daysCompleted;
+}
+
+function updateDashboard() {
+    const testsCompleted = APP.tests.length;
+    document.getElementById('tests-completed').textContent = `${testsCompleted}/55`;
+    
+    const totalHours = APP.history.reduce((sum, d) => {
+        return sum + Object.values(d.blocks).filter(Boolean).length * 2;
+    }, 0);
+    document.getElementById('total-hours').textContent = Math.round(totalHours);
+    
+    updateBlocksProgress();
+    updateAlerts();
+    document.getElementById('daily-quote').textContent = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+}
+
+function renderBlocks() {
+    const container = document.getElementById('blocks-container');
+    const completion = document.getElementById('block-completion');
+    
+    container.innerHTML = '';
+    completion.innerHTML = '';
+    
+    BLOCKS.forEach(block => {
+        const div = document.createElement('div');
+        div.className = 'block-timer';
+        div.innerHTML = `
+            <div class="block-info">
+                <span class="block-icon">${block.icon}</span>
+                <div>
+                    <div class="block-name">${block.id} (${block.time})</div>
+                    <div class="block-time">${block.subject} - ${block.desc}</div>
+                </div>
+            </div>
+            <button class="timer-btn ${APP.today.blocks[block.id] ? 'active' : ''}" onclick="toggleBlock('${block.id}')">
+                ${APP.today.blocks[block.id] ? '✓' : '○'}
+            </button>
+        `;
+        container.appendChild(div);
+        
+        const dot = document.createElement('div');
+        dot.className = `block-dot ${APP.today.blocks[block.id] ? 'completed' : ''}`;
+        dot.textContent = block.id;
+        completion.appendChild(dot);
+    });
+}
+
+function toggleBlock(blockId) {
+    APP.today.blocks[blockId] = !APP.today.blocks[blockId];
+    renderBlocks();
+    updateBlocksProgress();
+    saveData();
+}
+
+function updateBlocksProgress() {
+    const completed = Object.values(APP.today.blocks).filter(Boolean).length;
+    const percent = (completed / 7) * 100;
+    
+    document.getElementById('blocks-completed').textContent = completed;
+    document.getElementById('blocks-progress-bar').style.width = percent + '%';
+}
+
+function renderEnergyRating() {
+    const container = document.getElementById('energy-rating');
+    container.innerHTML = '';
+    
+    for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement('button');
+        btn.className = `energy-btn ${APP.today.energy === i ? 'selected' : ''}`;
+        btn.textContent = i;
+        btn.onclick = () => {
+            APP.today.energy = i;
+            renderEnergyRating();
+            saveData();
+        };
+        container.appendChild(btn);
+    }
+}
+
+function saveDay() {
+    if (!APP.today.energy) {
+        alert('⚠️ Please rate your energy level before saving!');
+        return;
+    }
+    
+    const completed = Object.values(APP.today.blocks).filter(Boolean).length;
+    if (completed < 5) {
+        if (!confirm(`Only ${completed}/7 blocks completed. Save anyway?`)) return;
+    }
+    
+    saveData();
+    alert(`✓ Day saved! ${completed}/7 blocks completed. Energy: ${APP.today.energy}/10. Keep going! 💪`);
+}
+
+function updateAlerts() {
+    const container = document.getElementById('alerts-container');
+    container.innerHTML = '';
+    
+    const completed = Object.values(APP.today.blocks).filter(Boolean).length;
+    const hour = new Date().getHours();
+    
+    if (hour >= 20 && completed < 5) {
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-danger';
+        alert.textContent = `🚨 Only ${completed}/7 blocks done. ${7-completed} blocks remaining!`;
+        container.appendChild(alert);
+    }
+    
+    const today = new Date().toISOString().split('T')[0];
+    const upcomingTests = TEST_SCHEDULE.filter(t => {
+        const diff = (new Date(t.date) - new Date(today)) / (1000 * 60 * 60 * 24);
+        return diff >= 0 && diff <= 3;
+    });
+    
+    upcomingTests.forEach(test => {
+        const diff = Math.ceil((new Date(test.date) - new Date(today)) / (1000 * 60 * 60 * 24));
+        const alert = document.createElement('div');
+        alert.className = 'alert';
+        alert.textContent = `📝 ${test.code} ${test.type} test in ${diff} day${diff !== 1 ? 's' : ''}!`;
+        container.appendChild(alert);
+    });
+    
+    APP.checkpoints.forEach(cp => {
+        const diff = Math.ceil((new Date(cp.date) - new Date(today)) / (1000 * 60 * 60 * 24));
+        if (diff > 0 && diff <= 3) {
+            const alert = document.createElement('div');
+            alert.className = 'alert';
+            alert.textContent = `🎯 ${cp.name} in ${diff} days. Target: ${cp.target}/300`;
+            container.appendChild(alert);
+        }
+    });
+}
+
+function renderTopics() {
+    ['physics', 'chemistry', 'maths'].forEach(subject => {
+        const container = document.getElementById(`${subject}-topics`);
+        container.innerHTML = '';
+        
+        TOPICS[subject].forEach(topic => {
+            const status = APP.topics[`${subject}-${topic}`] || 'weak';
+            const div = document.createElement('div');
+            div.className = `topic-item ${status}`;
+            div.textContent = topic;
+            div.onclick = () => openTopicModal(subject, topic);
+            container.appendChild(div);
+        });
+    });
+}
+
+function openTopicModal(subject, topic) {
+    APP.currentTopicEdit = `${subject}-${topic}`;
+    document.getElementById('topic-modal-title').textContent = topic;
+    document.getElementById('topic-modal').classList.add('active');
+}
+
+function setTopicStatus(status) {
+    if (APP.currentTopicEdit) {
+        APP.topics[APP.currentTopicEdit] = status;
+        saveData();
+        renderTopics();
+        closeModal('topic');
+    }
+}
+
+function populateTestDropdown() {
+    const select = document.getElementById('test-code');
+    TEST_SCHEDULE.forEach(test => {
+        const option = document.createElement('option');
+        option.value = test.code;
+        option.textContent = `${test.code} - ${test.type} (${new Date(test.date).toLocaleDateString('en-IN', {month: 'short', day: 'numeric'})})`;
+        select.appendChild(option);
+    });
+}
+
+function openAddTest() {
+    document.getElementById('test-modal').classList.add('active');
+}
+
+function saveTest() {
+    const code = document.getElementById('test-code').value;
+    const physics = parseInt(document.getElementById('test-physics').value) || 0;
+    const chemistry = parseInt(document.getElementById('test-chemistry').value) || 0;
+    const maths = parseInt(document.getElementById('test-maths').value) || 0;
+    
+    if (!code) {
+        alert('Please select a test!');
+        return;
+    }
+    
+    const testData = TEST_SCHEDULE.find(t => t.code === code);
+    const test = {
+        code,
+        type: testData.type,
+        date: testData.date,
+        physics,
+        chemistry,
+        maths,
+        total: physics + chemistry + maths,
+        addedDate: new Date().toISOString().split('T')[0]
+    };
+    
+    const idx = APP.tests.findIndex(t => t.code === code);
+    if (idx >= 0) APP.tests[idx] = test;
+    else APP.tests.push(test);
+    
+    saveData();
+    loadTestsList();
+    closeModal('test');
+    
+    document.getElementById('test-code').value = '';
+    document.getElementById('test-physics').value = '';
+    document.getElementById('test-chemistry').value = '';
+    document.getElementById('test-maths').value = '';
+}
+
+let currentTestFilter = 'upcoming';
+
+function filterTests(filter) {
+    currentTestFilter = filter;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    loadTestsList();
+}
+
+function loadTestsList() {
+    const list = document.getElementById('tests-list');
+    list.innerHTML = '';
+    
+    const today = new Date().toISOString().split('T')[0];
+    
+    let filtered = TEST_SCHEDULE.map(scheduled => {
+        const completed = APP.tests.find(t => t.code === scheduled.code);
+        return {...scheduled, ...completed, isCompleted: !!completed};
+    });
+    
+    if (currentTestFilter === 'upcoming') {
+        filtered = filtered.filter(t => !t.isCompleted && t.date >= today);
+    } else if (currentTestFilter === 'completed') {
+        filtered = filtered.filter(t => t.isCompleted);
+    }
+    
+    if (filtered.length === 0) {
+        list.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 40px;">No tests to show</p>';
+        return;
+    }
+    
+    filtered.forEach(test => {
+        const item = document.createElement('div');
+        item.className = `test-item ${test.isCompleted ? 'test-completed' : 'test-upcoming'}`;
+        
+        if (test.isCompleted) {
+            item.innerHTML = `
+                <div class="test-header">
+                    <div>
+                        <div class="test-code">${test.code} - ${test.type}</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">${new Date(test.date).toLocaleDateString('en-IN')}</div>
+                    </div>
+                    <div class="test-total">${test.total}/300</div>
+                </div>
+                <div style="display: flex; justify-content: space-around; font-size: 12px; color: var(--text-secondary); margin-top: 8px;">
+                    <div>P: ${test.physics}</div>
+                    <div>C: ${test.chemistry}</div>
+                    <div>M: ${test.maths}</div>
+                </div>
+            `;
+        } else {
+            const daysUntil = Math.ceil((new Date(test.date) - new Date(today)) / (1000 * 60 * 60 * 24));
+            item.innerHTML = `
+                <div class="test-header">
+                    <div>
+                        <div class="test-code">${test.code} - ${test.type}</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">${new Date(test.date).toLocaleDateString('en-IN')}</div>
+                    </div>
+                    <div style="font-size: 14px; color: var(--warning); font-weight: 700;">${daysUntil} days</div>
+                </div>
+            `;
+        }
+        
+        list.appendChild(item);
+    });
+}
+
+function openAddError() {
+    document.getElementById('error-modal').classList.add('active');
+}
+
+function saveError() {
+    const subject = document.getElementById('error-subject').value;
+    const topic = document.getElementById('error-topic').value;
+    const desc = document.getElementById('error-desc').value;
+    
+    if (!topic || !desc) {
+        alert('Please fill all fields!');
+        return;
+    }
+    
+    APP.errors.push({
+        subject,
+        topic,
+        desc,
+        date: new Date().toISOString().split('T')[0]
+    });
+    
+    saveData();
+    loadErrorsList();
+    closeModal('error');
+    
+    document.getElementById('error-topic').value = '';
+    document.getElementById('error-desc').value = '';
+}
+
+function loadErrorsList() {
+    const list = document.getElementById('errors-list');
+    
+    if (APP.errors.length === 0) {
+        list.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px; font-size: 14px;">No errors logged yet. Great job! 🎉</p>';
+        return;
+    }
+    
+    const recent = [...APP.errors].reverse().slice(0, 20);
+    list.innerHTML = recent.map(error => `
+        <div class="error-item">
+            <div class="error-topic">${error.subject.toUpperCase()} - ${error.topic}</div>
+            <div class="error-desc">${error.desc}</div>
+            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 6px;">${new Date(error.date).toLocaleDateString('en-IN')}</div>
+        </div>
+    `).join('');
+}
+
+function loadCheckpoints() {
+    const list = document.getElementById('checkpoints-list');
+    const today = new Date().toISOString().split('T')[0];
+    
+    list.innerHTML = APP.checkpoints.map(cp => {
+        const latestTests = APP.tests.filter(t => t.date <= cp.date).sort((a, b) => new Date(b.date) - new Date(a.date));
+        const latestScore = latestTests.length > 0 ? latestTests[0].total : 0;
+        
+        let status = 'status-ontrack';
+        let statusText = 'On Track';
+        
+        if (latestScore >= cp.target + 20) {
+            status = 'status-ahead';
+            statusText = 'Ahead 🔥';
+        } else if (latestScore < cp.target - 20) {
+            status = 'status-behind';
+            statusText = 'Behind ⚠️';
+        }
+        
+        const isPast = new Date(cp.date) < new Date(today);
+        
+        return `
+            <div class="checkpoint-item">
+                <div class="checkpoint-date">${cp.name} - ${new Date(cp.date).toLocaleDateString('en-IN', {month: 'short', day: 'numeric'})}</div>
+                <div style="margin: 8px 0;">
+                    <strong>Target:</strong> ${cp.target}/300 | 
+                    <strong>Current:</strong> ${latestScore}/300
+                </div>
+                <span class="checkpoint-status ${status}">${isPast ? 'Completed' : statusText}</span>
+            </div>
+        `;
+    }).join('');
+}
+
+function loadWeeklyStats() {
+    const stats = document.getElementById('weekly-stats');
+    
+    const thisWeek = APP.history.filter(d => {
+        const diff = (new Date() - new Date(d.date)) / (1000 * 60 * 60 * 24);
+        return diff >= 0 && diff < 7;
+    });
+    
+    const lastWeek = APP.history.filter(d => {
+        const diff = (new Date() - new Date(d.date)) / (1000 * 60 * 60 * 24);
+        return diff >= 7 && diff < 14;
+    });
+    
+    const thisWeekBlocks = thisWeek.reduce((sum, d) => sum + Object.values(d.blocks).filter(Boolean).length, 0);
+    const lastWeekBlocks = lastWeek.reduce((sum, d) => sum + Object.values(d.blocks).filter(Boolean).length, 0);
+    
+    const diff = thisWeekBlocks - lastWeekBlocks;
+    const diffText = diff > 0 ? `+${diff} blocks` : diff < 0 ? `${diff} blocks` : 'Same';
+    const diffColor = diff > 0 ? 'var(--success)' : diff < 0 ? 'var(--danger)' : 'var(--text-secondary)';
+    
+    stats.innerHTML = `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <div>
+                <div style="font-size: 14px; color: var(--text-secondary);">This Week</div>
+                <div style="font-size: 24px; font-weight: 800;">${thisWeekBlocks} blocks</div>
+            </div>
+            <div>
+                <div style="font-size: 14px; color: var(--text-secondary);">Last Week</div>
+                <div style="font-size: 24px; font-weight: 800;">${lastWeekBlocks} blocks</div>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 16px; font-weight: 700; color: ${diffColor};">
+            ${diffText}
+        </div>
+    `;
+}
+
+function loadBlockStats() {
+    const stats = document.getElementById('block-stats');
+    
+    if (APP.history.length === 0) {
+        stats.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Complete some days first!</p>';
+        return;
+    }
+    
+    const blockCompletion = {};
+    BLOCKS.forEach(block => {
+        const completed = APP.history.filter(d => d.blocks && d.blocks[block.id]).length;
+        const percent = Math.round((completed / APP.history.length) * 100);
+        blockCompletion[block.id] = {completed, percent, ...block};
+    });
+    
+    stats.innerHTML = Object.values(blockCompletion).map(b => `
+        <div style="margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span>${b.id} - ${b.subject}</span>
+                <strong>${b.percent}%</strong>
+            </div>
+            <div class="progress-bar" style="margin: 0;">
+                <div class="progress-fill" style="width: ${b.percent}%; font-size: 0;"></div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function switchPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById(`page-${page}`).classList.add('active');
+    event.currentTarget.classList.add('active');
+    
+    if (page === 'tests') loadTestsList();
+    if (page === 'topics') renderTopics();
+    if (page === 'analysis') {
+        loadWeeklyStats();
+        loadCheckpoints();
+        loadErrorsList();
+        loadBlockStats();
+    }
+}
+
+function closeModal(type) {
+    document.getElementById(`${type}-modal`).classList.remove('active');
+}
+
+function exportData() {
+    const data = JSON.stringify({
+        history: APP.history,
+        tests: APP.tests,
+        topics: APP.topics,
+        errors: APP.errors
+    }, null, 2);
+    const blob = new Blob([data], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `jee_journey_v2_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function exportWeeklyReport() {
+    const thisWeek = APP.history.filter(d => {
+        const diff = (new Date() - new Date(d.date)) / (1000 * 60 * 60 * 24);
+        return diff >= 0 && diff < 7;
+    });
+    
+    const totalBlocks = thisWeek.reduce((sum, d) => sum + Object.values(d.blocks).filter(Boolean).length, 0);
+    const avgEnergy = thisWeek.reduce((sum, d) => sum + (d.energy || 0), 0) / thisWeek.length || 0;
+    
+    const testsThisWeek = APP.tests.filter(t => {
+        const diff = (new Date() - new Date(t.addedDate)) / (1000 * 60 * 60 * 24);
+        return diff >= 0 && diff < 7;
+    });
+    
+    let report = `JEE JOURNEY - WEEKLY REPORT\n`;
+    report += `Generated: ${new Date().toLocaleDateString('en-IN')}\n`;
+    report += `\n=== THIS WEEK ===\n`;
+    report += `Study Blocks: ${totalBlocks}/49 (${Math.round(totalBlocks/49*100)}%)\n`;
+    report += `Average Energy: ${avgEnergy.toFixed(1)}/10\n`;
+    report += `Tests Taken: ${testsThisWeek.length}\n`;
+    
+    if (testsThisWeek.length > 0) {
+        report += `\n=== TEST SCORES ===\n`;
+        testsThisWeek.forEach(t => {
+            report += `${t.code}: ${t.total}/300 (P:${t.physics} C:${t.chemistry} M:${t.maths})\n`;
+        });
+    }
+    
+    const blob = new Blob([report], {type: 'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `weekly_report_${new Date().toISOString().split('T')[0]}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function resetData() {
+    if (confirm('⚠️ Delete ALL data? This cannot be undone!')) {
+        if (confirm('Really delete your entire journey?')) {
+            localStorage.clear();
+            location.reload();
+        }
+    }
+}
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    document.getElementById('theme-toggle').textContent = next === 'dark' ? '☀️' : '🌙';
+});
+
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.getElementById('theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+window.addEventListener('load', init);
+    </script>
+</body>
+</html>
